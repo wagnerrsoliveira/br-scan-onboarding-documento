@@ -9,16 +9,20 @@ const Home = () => {
   };
 
   return (
-    <Container>
-      <Image source={icon} tintColor="black" style={{ flex: 0 }} />
+    <>
       <Container>
-        <Text size={18} weight="bold">
+        <Image
+          source={icon}
+          tintColor="black"
+          style={{ flex: 0, marginBottom: 32 }}
+        />
+        <Text size={24} weight="bold">
           BrSafe
         </Text>
-        <Text>Bioface</Text>
+        <Text size={16}>Bioface</Text>
       </Container>
       <Button title="INICIAR" handleClick={handleClick} />
-    </Container>
+    </>
   );
 };
 

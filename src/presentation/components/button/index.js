@@ -1,8 +1,25 @@
 import React from "react";
-import { SButton } from "./styles";
+import {
+  SContainerButton,
+  SContainerButtonTitle,
+  STitleButton,
+} from "./styles";
 
 const Button = ({ title, handleClick }) => {
-  return <SButton title={title} onPress={handleClick} />;
+  function onPress() {
+    handleClick();
+  }
+
+  function renderChildren() {
+    return (
+      <SContainerButtonTitle>
+        <STitleButton>{title}</STitleButton>
+      </SContainerButtonTitle>
+    );
+  }
+  return (
+    <SContainerButton onPress={onPress}>{renderChildren()}</SContainerButton>
+  );
 };
 
 export default Button;
