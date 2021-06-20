@@ -9,18 +9,16 @@ const Home = () => {
   };
 
   return (
-    <>
+    <Container>
+      <Image source={icon} tintColor="black" style={{ flex: 0 }} />
       <Container>
-        <Image source={icon} tintColor="black" style={{ flex: 0 }} />
-        <Container>
-          <Text size={18} weight="bold">
-            BrSafe
-          </Text>
-          <Text>Bioface</Text>
-        </Container>
+        <Text size={18} weight="bold">
+          BrSafe
+        </Text>
+        <Text>Bioface</Text>
       </Container>
       <Button title="INICIAR" handleClick={handleClick} />
-    </>
+    </Container>
   );
 };
 
