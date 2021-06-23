@@ -7,7 +7,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test": "jest",
-    "emulator": "emulator -avd Pixel_3_API_29 -no-snapshot"
+    "emulator": "emulator -avd Pixel_3_API_29 -no-snapshot",
+    "postinstall": "jetifier -r"
   },
   "dependencies": {
     "jetifier": "^2.0.0",

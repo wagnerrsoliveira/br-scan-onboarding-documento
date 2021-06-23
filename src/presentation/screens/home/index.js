@@ -12,7 +12,7 @@ const Home = () => {
     <>
       <Container>
         <Image
-          source={icon}
+          source={require("../../../assets/IconHome.png")}
           tintColor="black"
           style={{ flex: 0, marginBottom: 32 }}
         />
