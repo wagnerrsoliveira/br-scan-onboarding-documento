@@ -1,21 +1,12 @@
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
-const { width, height } = Dimensions.get("screen");
-
-export const SButton = styled.Button.attrs({
-  color: "#C72825",
-})`
-  background-color: blue;
-  width: ${width}px;
-  height: ${height / 9}px;
-  padding: 0 16px;
-`;
+const { height } = Dimensions.get("screen");
 
 export const SContainerButton = styled.TouchableOpacity.attrs({
   activeOpacity: 0.8,
 })`
-  background-color: #c72825;
+  background-color: ${({ theme }) => theme.colors.primary};
   height: ${height / 10}px;
   padding: 0 16px;
   flex-direction: row;
@@ -29,9 +20,9 @@ export const SContainerButtonTitle = styled.View`
 `;
 
 export const STitleButton = styled.Text.attrs({ size: 24 })`
-  color: white;
+  color: ${({ theme }) => theme.text.primary};
   margin: 0 8px;
   font-size: 16px;
   text-align: center;
-  font-family: IBMPlexSans;
+  font-family: ${({ theme }) => theme.text.fontFamily};
 `;

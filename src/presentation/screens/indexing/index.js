@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { TextInputMask } from "react-native-masked-text";
 import { Button, Container, Text } from "../../components";
+import { withNavigation } from "react-navigation";
+import { useTheme } from "../../../main/theme/index";
 
-const Indexing = () => {
+const Indexing = ({ navigation }) => {
+  const { changeTheme } = useTheme();
+
+  useEffect(() => {
+    changeTheme("red");
+  }, []);
+
+  const refCpf = useRef();
   const [cpf, setCpf] = useState("");
 
   const handleChangeCpf = (value) => {
@@ -10,7 +19,9 @@ const Indexing = () => {
   };
 
   const handleClick = () => {
-    console.log("pass here");
+    if (refCpf.current?.isValid()) {
+      navigation.navigate("ChooseDocument");
+    }
   };
 
   return (
@@ -25,6 +36,7 @@ const Indexing = () => {
           onChangeText={handleChangeCpf}
           keyboardType="numeric"
           style={{ width: "100%", fontSize: 18 }}
+          ref={(ref) => (refCpf.current = ref)}
         />
       </Container>
       <Button title="INICIAR" handleClick={handleClick} />
@@ -32,4 +44,4 @@ const Indexing = () => {
   );
 };
 
-export default Indexing;
+export default withNavigation(Indexing);

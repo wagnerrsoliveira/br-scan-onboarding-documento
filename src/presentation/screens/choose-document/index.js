@@ -12,7 +12,6 @@ const ChooseDocument = () => {
     <Container
       style={{
         padding: 16,
-        backgroundColor: "#c72825",
       }}
     >
       <Text size={24} weight="bold" style={{ color: "white" }}>

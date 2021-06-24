@@ -2,10 +2,15 @@ import React from "react";
 import { Image } from "react-native";
 import icon from "../../../assets/IconHome.png";
 import { Button, Text, Container } from "../../components";
+import { withNavigation } from "react-navigation";
+import { useTheme } from "../../../main/theme/index";
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  const { changeTheme } = useTheme();
+
   const handleClick = () => {
-    console.log("pass here");
+    navigation.navigate("Indexing");
+    changeTheme("red");
   };
 
   return (
@@ -25,5 +30,4 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;
+export default withNavigation(Home);
