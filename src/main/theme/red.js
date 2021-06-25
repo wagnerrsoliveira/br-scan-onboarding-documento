@@ -6,7 +6,7 @@ export default {
     secundary: "#D63AF9",
 
     background: "#c72825",
-    text: "#333",
+    text: "#f5f5f5",
   },
   text: {
     fontFamily: "IBMPlexSans",

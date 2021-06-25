@@ -3,6 +3,7 @@ import { TextInputMask } from "react-native-masked-text";
 import { Button, Container, Text } from "../../components";
 import { withNavigation } from "react-navigation";
 import { useTheme } from "../../../main/theme/index";
+import { ScrollView } from "react-native";
 
 const Indexing = ({ navigation }) => {
   const { changeTheme } = useTheme();
@@ -19,14 +20,14 @@ const Indexing = ({ navigation }) => {
   };
 
   const handleClick = () => {
+    navigation.navigate("Tutorial");
     if (refCpf.current?.isValid()) {
-      navigation.navigate("ChooseDocument");
     }
   };
 
   return (
     <>
-      <Container style={{ padding: 16 }}>
+      <Container>
         <Text size={24}>Para começar, preencha as informações abaixo.</Text>
         <TextInputMask
           type="cpf"
@@ -38,8 +39,8 @@ const Indexing = ({ navigation }) => {
           style={{ width: "100%", fontSize: 18 }}
           ref={(ref) => (refCpf.current = ref)}
         />
+        <Button title="INICIAR" handleClick={handleClick} />
       </Container>
-      <Button title="INICIAR" handleClick={handleClick} />
     </>
   );
 };

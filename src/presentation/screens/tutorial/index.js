@@ -1,22 +1,41 @@
 import React, { useState } from "react";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
 import Swiper from "react-native-swiper";
 import icon from "../../../assets/IconHome.png";
 import { Button, Text, Container } from "../../components";
 
 const Tutorial = () => {
   const [step, setStep] = useState(0);
-  const renderPageTutorial = () => {
+  const [pages, setPages] = useState([
+    {
+      title: "Vamos lá!",
+      subtitle: "Tenha seus documentos em mãos, RG ou CNH",
+      source: require("../../../assets/Doc/IconCNH.png"),
+    },
+    {
+      title:
+        "Você precisa liberar o acesso à câmera para fotografar os documentos.",
+      source: require("../../../assets/Doc/DicoIconCamera.png"),
+    },
+  ]);
+  const renderPageTutorial = ({ title, subtitle, source }, index) => {
     return (
-      <Container>
-        <Image source={icon} tintColor="black" style={{ flex: 0 }} />
+      <View
+        key={`CARD${index}`}
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "space-around",
+        }}
+      >
+        <Image source={source} tintColor="black" />
         <Container>
-          <Text size={18} weight="bold">
-            BrSafe
+          <Text size={24} weight="bold">
+            {title}
           </Text>
-          <Text>Bioface</Text>
+          {subtitle && <Text>{subtitle}</Text>}
         </Container>
-      </Container>
+      </View>
     );
   };
 
@@ -36,8 +55,7 @@ const Tutorial = () => {
           bottom: 0,
         }}
       >
-        {renderPageTutorial()}
-        {renderPageTutorial()}
+        {pages.map(renderPageTutorial)}
       </Swiper>
       <Button title={`INICIAR${step}`} handleClick={handleClick} />
     </>

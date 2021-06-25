@@ -3,7 +3,7 @@ import { Image, View, Text, TouchableOpacity } from "react-native";
 
 const Card = ({ source, title }) => {
   return (
-    <TouchableOpacity
+    <View
       style={{
         flexDirection: "row",
         justifyContent: "flex-start",
@@ -11,12 +11,11 @@ const Card = ({ source, title }) => {
         height: 200,
         borderBottomWidth: 2,
         borderBottomColor: "black",
-        width: "100%",
       }}
     >
       <Image source={require("../../../assets/Doc/IconRG.png")} />
       <Text style={{ color: "white", marginLeft: 56 }}>{title}</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

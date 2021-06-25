@@ -17,7 +17,7 @@ const Home = ({ navigation }) => {
     <>
       <Container>
         <Image
-          source={require("../../../assets/IconHome.png")}
+          source={icon}
           tintColor="black"
           style={{ flex: 0, marginBottom: 32 }}
         />

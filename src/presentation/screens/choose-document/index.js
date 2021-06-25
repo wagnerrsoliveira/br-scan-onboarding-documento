@@ -14,10 +14,11 @@ const ChooseDocument = () => {
         padding: 16,
       }}
     >
-      <Text size={24} weight="bold" style={{ color: "white" }}>
+      <Text size={24} weight="bold">
         Selecione o tipo de documento.
       </Text>
       <FlatList
+        style={{ flex: 1 }}
         data={chooses}
         renderItem={renderCard}
         keyExtractor={(item) => item}

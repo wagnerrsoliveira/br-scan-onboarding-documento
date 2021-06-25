@@ -1,9 +1,12 @@
-import { SafeAreaView } from "react-native";
 import styled from "styled-components/native";
+import { Dimensions } from "react-native";
 
-export const ContainerCenter = styled(SafeAreaView)`
+const { height } = Dimensions.get("screen");
+
+export const ContainerCenter = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.background};
+  height: ${height}px;
 `;
