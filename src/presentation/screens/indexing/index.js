@@ -27,7 +27,7 @@ const Indexing = ({ navigation }) => {
 
   return (
     <>
-      <Container>
+      <ScrollView style={{ backgroundColor: "red" }}>
         <Text size={24}>Para começar, preencha as informações abaixo.</Text>
         <TextInputMask
           type="cpf"
@@ -38,9 +38,11 @@ const Indexing = ({ navigation }) => {
           keyboardType="numeric"
           style={{ width: "100%", fontSize: 18 }}
           ref={(ref) => (refCpf.current = ref)}
+          placeholderTextColor="#fff"
+          style={{ borderBottomColor: "#fff", borderBottomWidth: 2 }}
         />
         <Button title="INICIAR" handleClick={handleClick} />
-      </Container>
+      </ScrollView>
     </>
   );
 };

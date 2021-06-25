@@ -1,46 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Image, View } from "react-native";
 import Swiper from "react-native-swiper";
-import icon from "../../../assets/IconHome.png";
+import { withNavigation } from "react-navigation";
 import { Button, Text, Container } from "../../components";
+import { useTheme } from "../../../main/theme/index";
+import { tutorialList } from "./staticData";
 
-const Tutorial = () => {
+const Tutorial = ({ navigation }) => {
+  const { changeTheme } = useTheme();
+
+  const swiper = useRef();
   const [step, setStep] = useState(0);
-  const [pages, setPages] = useState([
-    {
-      title: "Vamos lá!",
-      subtitle: "Tenha seus documentos em mãos, RG ou CNH",
-      source: require("../../../assets/Doc/IconCNH.png"),
-    },
-    {
-      title:
-        "Você precisa liberar o acesso à câmera para fotografar os documentos.",
-      source: require("../../../assets/Doc/DicoIconCamera.png"),
-    },
-  ]);
+
+  useEffect(() => {
+    changeTheme("light");
+  }, []);
+
   const renderPageTutorial = ({ title, subtitle, source }, index) => {
     return (
       <View
         key={`CARD${index}`}
         style={{
           flex: 1,
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "space-around",
+          alignItems: "center",
+          paddingTop: 48,
         }}
       >
         <Image source={source} tintColor="black" />
-        <Container>
+        <View>
           <Text size={24} weight="bold">
             {title}
           </Text>
           {subtitle && <Text>{subtitle}</Text>}
-        </Container>
+        </View>
       </View>
     );
   };
 
   const handleClick = () => {
-    setStep((old) => old + 1);
+    if (step >= tutorialList.length - 1) {
+      navigation.navigate("ChooseDocument");
+    } else {
+      swiper.current?.scrollBy(step + 1, true);
+    }
   };
 
   return (
@@ -50,16 +54,18 @@ const Tutorial = () => {
         loop={false}
         index={step}
         onIndexChanged={setStep}
-        buttonWrapperStyle={{
-          position: "absolute",
-          bottom: 0,
+        ref={(ref) => {
+          swiper.current = ref;
         }}
       >
-        {pages.map(renderPageTutorial)}
+        {tutorialList.map(renderPageTutorial)}
       </Swiper>
-      <Button title={`INICIAR${step}`} handleClick={handleClick} />
+      <Button
+        title={tutorialList[step].buttonTitle || ""}
+        handleClick={handleClick}
+      />
     </>
   );
 };
 
-export default Tutorial;
+export default withNavigation(Tutorial);

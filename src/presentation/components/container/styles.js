@@ -8,5 +8,4 @@ export const ContainerCenter = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.background};
-  height: ${height}px;
 `;
