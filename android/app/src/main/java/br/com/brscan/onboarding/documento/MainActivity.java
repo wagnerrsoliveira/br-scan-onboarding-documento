@@ -1,4 +1,4 @@
-package com.brscanonboardingdocumento;
+package br.com.brscan.onboarding.documento;
 
 import com.facebook.react.ReactActivity;
 import android.content.Intent;
