@@ -1,7 +1,7 @@
 import React from "react";
-import { Image, View, Text, TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity } from "react-native";
 
-const Card = ({ uri, title }) => {
+const Card = ({ uri, title, onPress }) => {
   return (
     <TouchableOpacity
       style={{
@@ -10,6 +10,7 @@ const Card = ({ uri, title }) => {
         alignItems: "center",
         height: 200,
       }}
+      onPress={onPress}
     >
       <Image source={{ uri }} />
       <Text style={{ color: "white", marginLeft: 56 }}>{title}</Text>

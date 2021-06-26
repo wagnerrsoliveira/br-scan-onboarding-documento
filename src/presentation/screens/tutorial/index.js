@@ -41,7 +41,7 @@ const Tutorial = ({ navigation }) => {
 
   const handleClick = () => {
     if (step >= tutorialList.length - 1) {
-      navigation.navigate("ChooseDocument");
+      navigation.navigate("ChooseTypeDocument");
     } else {
       swiper.current?.scrollBy(step + 1, true);
     }

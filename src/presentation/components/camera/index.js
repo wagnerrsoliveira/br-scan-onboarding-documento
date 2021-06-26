@@ -11,13 +11,14 @@ import { Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
 
-const Camera = () => {
+const Camera = ({ onPress }) => {
   const camera = useRef();
   takePicture = async () => {
     if (camera.current) {
       const options = { quality: 0.5, base64: true };
       const data = await camera.current.takePictureAsync(options);
       console.log(data.uri);
+      onPress();
     }
   };
   return (

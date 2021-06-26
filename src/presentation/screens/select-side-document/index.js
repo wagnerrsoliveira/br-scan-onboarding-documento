@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { FlatList, Image } from "react-native";
 import { Text, Container, Card } from "../../components";
 import { useTheme } from "../../../main/theme/index";
-import { chooses } from "./staticData";
+import { rg } from "./staticData";
 import separatorImage from "../../../assets/Doc/Line.png";
+import { withNavigation } from "react-navigation";
 
-const ChooseDocument = () => {
+const SelectSideDocument = ({ navigation }) => {
   const { changeTheme } = useTheme();
 
   useEffect(() => {
@@ -13,7 +14,17 @@ const ChooseDocument = () => {
   }, []);
 
   const renderCard = ({ item }) => {
-    return <Card key={item.title} title={item.title} uri={item.uri} />;
+    return (
+      <Card
+        title={item.title}
+        uri={item.uri}
+        onPress={handleSelectSideDocument}
+      />
+    );
+  };
+
+  const handleSelectSideDocument = () => {
+    navigation.navigate("CaptureImage");
   };
 
   const renderSeparator = () => {
@@ -34,12 +45,12 @@ const ChooseDocument = () => {
         }
         ItemSeparatorComponent={renderSeparator}
         style={{ flex: 1 }}
-        data={chooses}
+        data={rg}
         renderItem={renderCard}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.title}
       />
     </Container>
   );
 };
 
-export default ChooseDocument;
+export default withNavigation(SelectSideDocument);
