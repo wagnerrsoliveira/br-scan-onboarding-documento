@@ -3,14 +3,13 @@ import { Image } from "react-native";
 import icon from "../../../assets/IconHome.png";
 import { Button, Text, Container } from "../../components";
 import { withNavigation } from "react-navigation";
-import { useTheme } from "../../../main/theme/index";
+import { useApp } from "../../../main/contexts/appContext";
 
 const Home = ({ navigation }) => {
-  const { changeTheme } = useTheme();
+  const { handleNextScreen } = useApp();
 
   const handleClick = () => {
-    navigation.navigate("Indexing");
-    changeTheme("red");
+    handleNextScreen("Home", navigation);
   };
 
   return (

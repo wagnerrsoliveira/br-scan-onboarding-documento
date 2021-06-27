@@ -1,16 +1,26 @@
 import React, { useEffect } from "react";
 import { FlatList, Image } from "react-native";
 import { Text, Container, Card } from "../../components";
-import { useTheme } from "../../../main/theme/index";
 import { chooses } from "./staticData";
 import separatorImage from "../../../assets/Doc/Line.png";
 import { withNavigation } from "react-navigation";
+import { useApp } from "../../../main/contexts/appContext";
 
 const ChooseTypeDocument = ({ navigation }) => {
-  const { changeTheme } = useTheme();
+  const { handleNextScreen, handleBackScreen } = useApp();
+
+  const handleGoBack = () => {
+    handleBackScreen("Indexing", navigation);
+  };
 
   useEffect(() => {
-    changeTheme("red");
+    BackHandler.addEventListener("chooseTypeDocumentBackPress", handleGoBack);
+
+    return () =>
+      BackHandler.removeEventListener(
+        "chooseTypeDocumentBackPress",
+        handleGoBack
+      );
   }, []);
 
   const renderCard = ({ item }) => {
@@ -24,7 +34,7 @@ const ChooseTypeDocument = ({ navigation }) => {
   };
 
   const handleChooseTypeDocument = () => {
-    navigation.navigate("SelectSideDocument");
+    handleNextScreen("ChooseTypeDocument");
   };
 
   const renderSeparator = () => {
