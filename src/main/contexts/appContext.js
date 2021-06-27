@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { useTheme } from "../theme/index";
 import { getNextScreen, getPreviousScreen } from "../../domain";
 
@@ -6,6 +6,7 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const { changeTheme } = useTheme();
+  const [document, setDocument] = useState(null);
 
   const handleNextScreen = useCallback((currentScreen, navigation) => {
     const nextScreen = getNextScreen(currentScreen);
@@ -18,9 +19,13 @@ const AppProvider = ({ children }) => {
   const handleBackScreen = useCallback((currentScreen, navigation) => {
     const previousScreen = getPreviousScreen(currentScreen);
     if (previousScreen) {
-      navigation.navigate(previousScreen.screen);
+      navigation.goBack();
       changeTheme(previousScreen.theme);
     }
+  }, []);
+
+  const handleSelectDocument = useCallback((documentSelected) => {
+    setDocument(documentSelected);
   }, []);
 
   return (
@@ -28,6 +33,8 @@ const AppProvider = ({ children }) => {
       value={{
         handleNextScreen,
         handleBackScreen,
+        handleSelectDocument,
+        document,
       }}
     >
       {children}

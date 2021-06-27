@@ -1,51 +1,60 @@
 import React, { useEffect } from "react";
-import { FlatList, Image } from "react-native";
+import { FlatList, Image, BackHandler } from "react-native";
 import { Text, Container, Card } from "../../components";
-import { useTheme } from "../../../main/theme/index";
-import { rg } from "./staticData";
 import separatorImage from "../../../assets/Doc/Line.png";
 import { withNavigation } from "react-navigation";
+import { useApp } from "../../../main/contexts/appContext";
 
 const SelectSideDocument = ({ navigation }) => {
-  const { changeTheme } = useTheme();
+  const { handleNextScreen, handleBackScreen, document } = useApp();
+
+  const handleGoBack = () => {
+    handleBackScreen("ChooseTypeDocument", navigation);
+  };
 
   useEffect(() => {
-    changeTheme("red");
-  }, []);
+    BackHandler.addEventListener("hardwareBackPress", handleGoBack);
+
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", handleGoBack);
+  }, [navigation]);
 
   const renderCard = ({ item }) => {
     return (
       <Card
         title={item.title}
-        uri={item.uri}
+        resource={item.resource}
         onPress={handleSelectSideDocument}
       />
     );
   };
 
   const handleSelectSideDocument = () => {
-    navigation.navigate("CaptureImage");
+    handleNextScreen("SelectSideDocument", navigation);
   };
 
   const renderSeparator = () => {
-    return <Image source={separatorImage} width="100%" />;
+    return <Image source={separatorImage} style={{ width: "100%" }} />;
   };
+
+  if (!document) return <></>;
 
   return (
     <Container
       style={{
         padding: 16,
       }}
+      porcet={10}
     >
       <FlatList
         ListHeaderComponent={
-          <Text size={24} weight="bold">
-            Selecione o tipo de documento.
+          <Text size={16} weight="bold">
+            {document.title}
           </Text>
         }
         ItemSeparatorComponent={renderSeparator}
         style={{ flex: 1 }}
-        data={rg}
+        data={document.value}
         renderItem={renderCard}
         keyExtractor={(item) => item.title}
       />

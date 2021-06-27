@@ -1,19 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Image, View } from "react-native";
+import { Image, View, BackHandler } from "react-native";
 import Swiper from "react-native-swiper";
 import { withNavigation } from "react-navigation";
-import { Button, Text, Container } from "../../components";
-import { useTheme } from "../../../main/theme/index";
+import { Button, Text, Container, Header } from "../../components";
+import { useApp } from "../../../main/contexts/appContext";
 import { tutorialList } from "./staticData";
 
 const Tutorial = ({ navigation }) => {
-  const { changeTheme } = useTheme();
-
+  const { handleNextScreen, handleBackScreen } = useApp();
   const swiper = useRef();
   const [step, setStep] = useState(0);
 
+  const handleGoBack = () => {
+    handleBackScreen("Tutorial", navigation);
+  };
+
   useEffect(() => {
-    changeTheme("light");
+    BackHandler.addEventListener("hardwareBackPress", handleGoBack);
+
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", handleGoBack);
   }, []);
 
   const renderPageTutorial = ({ title, subtitle, source }, index) => {
@@ -41,14 +47,23 @@ const Tutorial = ({ navigation }) => {
 
   const handleClick = () => {
     if (step >= tutorialList.length - 1) {
-      navigation.navigate("ChooseTypeDocument");
+      handleNextScreen("Tutorial", navigation);
     } else {
       swiper.current?.scrollBy(step + 1, true);
     }
   };
 
+  const handleBack = () => {
+    if (step === 0) {
+      handleBackScreen("Tutorial", navigation);
+    } else {
+      swiper.current?.scrollTo("next");
+    }
+  };
+
   return (
     <>
+      <Header handleLeft={handleBack} />
       <Swiper
         showsPagination={false}
         loop={false}
@@ -61,7 +76,7 @@ const Tutorial = ({ navigation }) => {
         {tutorialList.map(renderPageTutorial)}
       </Swiper>
       <Button
-        title={tutorialList[step].buttonTitle || ""}
+        title={tutorialList[step].buttonTitle + step || ""}
         handleClick={handleClick}
       />
     </>

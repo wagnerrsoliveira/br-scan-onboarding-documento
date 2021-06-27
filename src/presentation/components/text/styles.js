@@ -5,6 +5,6 @@ export const ContainerText = styled.Text`
   font-size: ${({ size }) => (size ? size : 14)}px;
   font-weight: ${({ weight }) => (weight ? weight : "normal")};
   font-family: IBMPlexSans;
-  text-align: center;
+  text-align: ${({ align }) => (align ? align : "center")};
   padding: 16px;
 `;

@@ -8,6 +8,7 @@ export const SContainerButton = styled.TouchableOpacity.attrs({
 })`
   background-color: ${({ theme }) => theme.colors.primary};
   height: ${height / 10}px;
+  width: 100%;
   padding: 0 16px;
   flex-direction: row;
   align-items: center;
