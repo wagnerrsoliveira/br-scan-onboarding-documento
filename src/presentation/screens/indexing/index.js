@@ -10,8 +10,8 @@ const Indexing = ({ navigation }) => {
   const { handleNextScreen, handleBackScreen } = useApp();
 
   const handleClick = () => {
-    handleNextScreen("Indexing", navigation);
     if (refCpf.current?.isValid()) {
+      handleNextScreen("Indexing", navigation);
     }
   };
 
