@@ -2,22 +2,24 @@ import React, { useEffect } from "react";
 import { FlatList, Image, BackHandler } from "react-native";
 import { Text, Container, Card } from "../../components";
 import separatorImage from "../../../assets/Doc/Line.png";
-import { withNavigation } from "react-navigation";
+import { withNavigationFocus } from "react-navigation";
 import { useApp } from "../../../main/contexts/appContext";
 
-const SelectSideDocument = ({ navigation }) => {
+const SelectSideDocument = ({ navigation, isFocused }) => {
   const { handleNextScreen, handleBackScreen, document } = useApp();
 
   const handleGoBack = () => {
     handleBackScreen("ChooseTypeDocument", navigation);
+    true;
   };
 
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleGoBack);
-
+    if (isFocused) {
+      BackHandler.addEventListener("hardwareBackPress", handleGoBack);
+    }
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", handleGoBack);
-  }, [navigation]);
+  }, [isFocused]);
 
   const renderCard = ({ item }) => {
     return (
@@ -62,4 +64,4 @@ const SelectSideDocument = ({ navigation }) => {
   );
 };
 
-export default withNavigation(SelectSideDocument);
+export default withNavigationFocus(SelectSideDocument);

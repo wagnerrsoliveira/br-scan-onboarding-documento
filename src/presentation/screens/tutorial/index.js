@@ -49,16 +49,12 @@ const Tutorial = ({ navigation }) => {
     if (step >= tutorialList.length - 1) {
       handleNextScreen("Tutorial", navigation);
     } else {
-      swiper.current?.scrollBy(step + 1, true);
+      swiper.current?.scrollBy(1, true);
     }
   };
 
   const handleBack = () => {
-    if (step === 0) {
-      handleBackScreen("Tutorial", navigation);
-    } else {
-      swiper.current?.scrollTo("next");
-    }
+    swiper.current?.scrollBy(-1, true);
   };
 
   return (
@@ -76,7 +72,7 @@ const Tutorial = ({ navigation }) => {
         {tutorialList.map(renderPageTutorial)}
       </Swiper>
       <Button
-        title={tutorialList[step].buttonTitle + step || ""}
+        title={tutorialList[step].buttonTitle || ""}
         handleClick={handleClick}
       />
     </>

@@ -40,7 +40,6 @@ const Indexing = ({ navigation }) => {
           style={{
             height: "100%",
             flexDirection: "column",
-            backgroundColor: "red",
             justifyContent: "space-between",
             paddingTop: 81,
             paddingBottom: 16,

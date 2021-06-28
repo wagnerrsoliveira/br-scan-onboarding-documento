@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity, View, Image, Text } from "react-native";
 import iconArrowBack from "../../../assets/IconLeft.png";
+import { ImageStyled } from "./styles";
 
 const Header = ({ handleLeft, handleRight }) => {
   return (
@@ -11,14 +12,22 @@ const Header = ({ handleLeft, handleRight }) => {
         justifyContent: "space-between",
       }}
     >
-      <TouchableOpacity onPress={handleLeft}>
-        <Image source={iconArrowBack} tintColor="black" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleRight}>
-        <Text style={{ fontSize: 20, fontWeight: "bold", color: "black" }}>
-          X
-        </Text>
-      </TouchableOpacity>
+      {handleLeft ? (
+        <TouchableOpacity onPress={handleLeft}>
+          <ImageStyled source={iconArrowBack} />
+        </TouchableOpacity>
+      ) : (
+        <View />
+      )}
+      {handleRight ? (
+        <TouchableOpacity onPress={handleRight}>
+          <Text style={{ fontSize: 20, fontWeight: "bold", color: "black" }}>
+            X
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <View />
+      )}
     </View>
   );
 };

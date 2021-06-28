@@ -12,4 +12,5 @@ export default {
     fontFamily: "IBMPlexSans",
     primary: "#c72825",
   },
+  tintColor: "#FFF",
 };
